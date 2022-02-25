@@ -1,3 +1,4 @@
+# all possible word choices to reduce solution set
 dict2 = ["aahed", "aalii", "aargh", "aarti", "abaca", "abaci", "abacs",
              "abaft", "abaka", "abamp", "aband", "abash", "abask", "abaya",
              "abbas", "abbed", "abbes", "abcee", "abeam", "abear", "abele",
@@ -1519,7 +1520,7 @@ dict2 = ["aahed", "aalii", "aargh", "aarti", "abaca", "abaci", "abacs",
              "zowee", "zowie", "zulus", "zupan", "zupas", "zuppa", "zurfs",
              "zuzim", "zygal", "zygon", "zymes", "zymic"]
 
-
+# used in development to determine best possible starting word
 def wordRank(word, candidates):
     rank = 0
     for i in range(len(word)):
@@ -1536,7 +1537,7 @@ def wordRank(word, candidates):
             rank += getFreqs(candidates)[4][char]
     return rank
 
-
+# used in development to determine best possible starting word
 def getFreqs(candidates):
     charFreq1 = {'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0, 'k': 0, 'l': 0, 'm': 0,
                  'n': 0, 'o': 0, 'p': 0, 'q': 0, 'r': 0, 's': 0, 't': 0, 'u': 0, 'v': 0, 'w': 0, 'x': 0, 'y': 0, 'z': 0}
@@ -1564,7 +1565,7 @@ def getFreqs(candidates):
                 charFreq5[char] += 1
     return charFreqs
 
-
+# finds the next best word to use by metric of average solution set eliminations
 def nextWord(word, colors, candidates):
     candidates = eliminate(word, colors, candidates)
     bestWord = dict2[0]
@@ -1576,7 +1577,7 @@ def nextWord(word, colors, candidates):
             bestWordElims = wElims
     return bestWord, bestWordElims
 
-
+# eliminate words from solution set given the colors output from the game
 def eliminate(word, colors, candidates):
     for i in range(5):
         color = colors[i]
@@ -1599,7 +1600,7 @@ def eliminate(word, colors, candidates):
             j += 1
     return candidates
 
-
+# counts how many eliminations given a word and its solution
 def eliminations(word, solution, candidates):
     copy = candidates.copy()
     colors = [2, 2, 2, 2, 2]
@@ -1613,7 +1614,7 @@ def eliminations(word, solution, candidates):
     newSet = eliminate(word, colors, copy)
     return len(candidates) - len(newSet)
 
-
+# computes the average amount of eliminations for a word given the solution set
 def averageEliminations(word, candidates):
     totalEliminations = 0
     i = 0
