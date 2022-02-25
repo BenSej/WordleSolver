@@ -1,6 +1,8 @@
 from Methods import nextWord, averageEliminations
 
 if __name__ == '__main__':
+    
+    # all possible solutions
     solutionSet = ["cigar", "rebut", "sissy", "humph", "awake", "blush", "focal", "evade", "naval", "serve", "heath", "dwarf",
              "model", "karma", "stink", "grade", "quiet", "bench", "abate", "feign", "major", "death", "fresh", "crust",
              "stool", "colon", "abase", "marry", "react", "batty", "pride", "floss", "helix", "croak", "staff", "paper",
@@ -207,7 +209,10 @@ if __name__ == '__main__':
             if len(solutionSet) == 1:
                 break
             print(str(len(solutionSet)) + " Possible Solutions: " + str(solutionSet))
+            
+            # if there are < 20 solutions remaining, we may want to choose one of them as our next word despite it not being the best choice
             if len(solutionSet) < 20:
+                
                 averages = {}
                 bestWord = solutionSet[0]
                 bestWordAverage = averageEliminations(bestWord, solutionSet)
@@ -226,7 +231,8 @@ if __name__ == '__main__':
                 print("Next Word: " + next.upper())
 
         print("Solution: " + solutionSet[0].upper())
-
+    
+    # used in development to determine average attempts to find a solution
     def test():
         word = "soare"
         attempts = 1
